@@ -1,5 +1,8 @@
 <?php
 class PluginApiSimple_one{
+  function __construct(){
+    wfPlugin::includeonce('wf/yml');
+  }
   public function __call($method, $args) {
     /**
      * 
