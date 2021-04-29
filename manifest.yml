@@ -1,5 +1,9 @@
-version: 1.2.0
+version: 1.2.1
 history:
+  1.2.1:
+    date: '2021-04-29'
+    title: Readme
+    description: 'Readme improvement.'
   1.2.0:
     date: '2021-04-27'
     title: Plugin

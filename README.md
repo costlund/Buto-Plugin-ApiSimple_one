@@ -49,10 +49,8 @@ user:
     client: false
 error: {  }
 data:
-  error: {  }
-  rs:
-    - James
-    - Jane
+  - James
+  - Jane
 ```
 
 ### user
@@ -76,7 +74,7 @@ Method example.
 public function users($json, $settings, $key_data){
   $data = new PluginWfArray();
   $data->set('error', array());
-  $data->set('rs', array('James', 'Jane'));
+  $data->set('data', array('James', 'Jane'));
   return $data->get();
 }
 ```
