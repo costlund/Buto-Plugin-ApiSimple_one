@@ -21,7 +21,7 @@ class PluginApiSimple_one{
     $settings = new PluginWfArray(wfGlobals::get("settings/plugin_modules/$class/settings"));
     $key = wfRequest::get('key');
     $remote_addr = wfServer::getRemoteAddr();
-    $json = new PluginWfArray(array('theme' => $this->get_theme(), 'request' => array('xurl' => wfRequest::get('xurl'), 'url' => wfServer::calcUrl(), 'class' => $class, 'method' => $method, 'key' => $key, 'remote_addr' => $remote_addr), 'user' => array('role' => array()), 'error' => array(), 'data' => array()));
+    $json = new PluginWfArray(array('theme' => $this->get_theme(), 'request' => array('xurl' => wfRequest::get('xurl'), 'url' => wfServer::calcUrl(), 'class' => $class, 'method' => $method, 'key' => $key, 'remote_addr' => $remote_addr), 'user' => array('role' => array(), 'language' => null), 'error' => array(), 'data' => array()));
     $this_class = __CLASS__;
     /**
      * Security key.
@@ -125,6 +125,10 @@ class PluginApiSimple_one{
      * 
      */
     $json->set('user/role/client', wfUser::hasRole('client'));
+    /**
+     * 
+     */
+    $json->set('user/language', wfI18n::getLanguage());
     /**
      * 
      */
