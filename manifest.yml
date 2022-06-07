@@ -1,5 +1,9 @@
-version: 1.3.0
+version: 1.3.1
 history:
+  1.3.1:
+    date: '2022-06-07'
+    title: Versions
+    description: 'Versions update.'
   1.3.0:
     date: '2021-06-14'
     title: Language
@@ -47,10 +51,10 @@ history:
 plugin:
   -
     name: slack/webhook_v1
-    version: '1.0'
+    version: 1.0.1
   -
     name: wf/yml
-    version: 1.3.0
+    version: 1.4.0
 sys:
   -
     name: mercury
