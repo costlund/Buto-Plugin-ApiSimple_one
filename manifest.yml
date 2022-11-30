@@ -1,5 +1,9 @@
-version: 1.3.2
+version: 1.4.0
 history:
+  1.4.0:
+    date: '2022-11-30'
+    title: 'Method data'
+    description: 'Handle if method data has array key data or rs. Error handling improvements.'
   1.3.2:
     date: '2022-09-27'
     title: Versions

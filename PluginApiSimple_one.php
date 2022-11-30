@@ -5,7 +5,7 @@ class PluginApiSimple_one{
   }
   public function __call($method, $args) {
     /**
-     * 
+     * header
      */
     if(wfRequest::get('xurl')){
       header('Access-Control-Allow-Origin: '.wfRequest::get('xurl'));
@@ -38,8 +38,11 @@ class PluginApiSimple_one{
         }
       }
       if(!$key_match){
-        $json->set('error/', array('message' => "$this_class says: Param security/keys does not match key."));
+        $json->set('error/message/', "$this_class says: Param security/keys does not match key.");
       }
+    }
+    if(!$settings->is_set("methods/$method")){
+      $json->set('error/message/', "$this_class says: Method $method is not set in theme settings file!");
     }
     $settings->set("methods/$method/security_keys_data", $security_keys_data);
     /**
@@ -55,7 +58,7 @@ class PluginApiSimple_one{
         }
       }
       if(!$remote_addr_match){
-        $json->set('error/', array('message' => "$this_class says: Param security/remote_addr does not match remote_addr."));
+        $json->set('error/message/', "$this_class says: Param security/remote_addr does not match remote_addr.");
       }
     }
     /**
@@ -71,7 +74,14 @@ class PluginApiSimple_one{
           $json->set('error/message/', "$this_class says: Method $obj_method does not exist in plugin $plugin.");
         }else{
           $method_data = new PluginWfArray($obj->$obj_method($settings->get("methods/$method")));
-          $json->set('data', $method_data->get('data'));
+          /**
+           * data or rs
+           */
+          if($method_data->is_set('data')){
+            $json->set('data', $method_data->get('data'));
+          }elseif($method_data->is_set('rs')){
+            $json->set('data', $method_data->get('rs'));
+          }
           /**
            * error
            */
