@@ -16,7 +16,7 @@ class PluginApiSimple_one{
     /**
      * 
      */
-    $method = substr($method, 5);
+    $method = wfPhpfunc::substr($method, 5);
     $class = wfGlobals::get('class');
     $settings = new PluginWfArray(wfGlobals::get("settings/plugin_modules/$class/settings"));
     $key = wfRequest::get('key');
@@ -103,7 +103,7 @@ class PluginApiSimple_one{
       /**
        * 
        */
-      if($settings->get('slack/domain_filter') && !strstr(wfServer::getServerName(), $settings->get('slack/domain_filter'))){
+      if($settings->get('slack/domain_filter') && !wfPhpfunc::strstr(wfServer::getServerName(), $settings->get('slack/domain_filter'))){
         $run = false;
       }
       /**
