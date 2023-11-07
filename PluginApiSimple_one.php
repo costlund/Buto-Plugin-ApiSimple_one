@@ -19,6 +19,7 @@ class PluginApiSimple_one{
     $method = wfPhpfunc::substr($method, 5);
     $class = wfGlobals::get('class');
     $settings = new PluginWfArray(wfGlobals::get("settings/plugin_modules/$class/settings"));
+    $settings->set('security/active', null);
     $key = wfRequest::get('key');
     $remote_addr = wfServer::getRemoteAddr();
     $json = new PluginWfArray(array('theme' => $this->get_theme(), 'request' => array('xurl' => wfRequest::get('xurl'), 'url' => wfServer::calcUrl(), 'class' => $class, 'method' => $method, 'key' => $key, 'remote_addr' => $remote_addr), 'user' => array('role' => array(), 'language' => null), 'error' => array(), 'data' => array()));
@@ -34,6 +35,7 @@ class PluginApiSimple_one{
         if($v->get('value')==$key){
           $key_match = true;
           $security_keys_data = $v->get('data');
+          $settings->set('security/active', $value);
           break;
         }
       }
@@ -73,7 +75,7 @@ class PluginApiSimple_one{
         if(!method_exists($obj, $obj_method) && !method_exists($obj, '__call')){
           $json->set('error/message/', "$this_class says: Method $obj_method does not exist in plugin $plugin.");
         }else{
-          $method_data = new PluginWfArray($obj->$obj_method($settings->get("methods/$method")));
+          $method_data = new PluginWfArray($obj->$obj_method($settings->get("methods/$method"), $settings));
           /**
            * data or rs
            */

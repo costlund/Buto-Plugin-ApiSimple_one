@@ -17,6 +17,8 @@ plugin_modules:
             value: abcdef
             data:
               some_id: 1234
+            replace:
+              some_tag: "my_tag"
         _remote_addr:
           -
             value: '127.0.0.1'
@@ -61,6 +63,12 @@ Param error is for error handling.
 
 ### data
 This has value of the method involved in request.
+
+### replace
+Replace content in sql.
+```
+select id, name from account where tag = '[some_tag]'
+```
 
 ## Output
 Set output=yml to render yml instead of json.
